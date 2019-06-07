@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 export const Drawer = createDrawerNavigator(
   {
       Todo : Todo,
-      Hey : Hey
+      Location : Hey
   },
   {
       contentComponent:(props) => (

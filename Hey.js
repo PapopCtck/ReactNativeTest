@@ -1,11 +1,29 @@
 import React, { Component } from 'react'
-import { Text, View,StyleSheet } from 'react-native'
+import { Text, View,StyleSheet,Button } from 'react-native'
+import FetchUserLocation from './FetchUserLocation'
+import UsersMap from './UsersMap'
 
 export default class Hey extends Component {
+    state = {
+        userLocation : null,
+      }
+    handleGetLocation=()=>{
+        console.log("Location")
+        navigator.geolocation.getCurrentPosition(location => {
+            this.setState({
+                userLocation : {
+              latitude: location.coords.latitude,
+              longitude: location.coords.longitude
+                }
+            })
+          });
+        console.log(this.state)
+    }
     render() {
         return (
             <View style={styles.container}>
-                <Text> Hey </Text>
+                <FetchUserLocation style={styles.Map} handleGetLocation={this.handleGetLocation}></FetchUserLocation>
+                <UsersMap userLocation={this.state.userLocation}></UsersMap>
             </View>
         )
     }
@@ -13,7 +31,8 @@ export default class Hey extends Component {
 const styles = StyleSheet.create({
     container : {
         flex: 1,
-        justifyContent : "center",
-        alignItems: "center"
-    }
+
+        alignItems: "center",
+    },
+
 })
